@@ -1,12 +1,6 @@
-let debug = false;
-
-let board = !debug? [
+const board = [
 	new Array(3),
 	new Array(3),
-	new Array(3)
-] : [
-	['X',,,],
-	['O','O',,],
 	new Array(3)
 ];
 
@@ -46,7 +40,7 @@ function draw() {
 	}
 
 	// //the AI plays based on minimax score
-	if (!debug && turn == AI && winner == undefined) {
+	if (turn == AI && winner == undefined && !allFull(board)) {
 		let bestScore, bestI, bestJ;
 		for (let i = 0; i < 3; ++i) {
 			for (let j = 0; j < 3; ++j) {
@@ -172,25 +166,4 @@ function clone(arr2d) {
 	const arr = [];
 	for (let i = 0; i < arr2d.length; ++i) arr.push(arr2d[i].slice());
 	return arr;
-}
-
-
-function minStat() {
-	for (let i = 0; i < 3; ++i) {
-		for (let j = 0; j < 3; ++j) {
-			if (board[i][j] == undefined) console.log(`At ${i},${j} : ${minimax(board,  i, j, false)}`);
-		}
-	}
-}
-
-
-function showBoard(board) {
-	for (let i = 0; i < 3; ++i) {
-		let str = '';
-		for (let j = 0; j < 3; ++j) {
-			if (board[i][j] != undefined) str += board[i][j] + '|';
-			else str += '_|';
-		}
-		console.log(str);
-	}
 }
